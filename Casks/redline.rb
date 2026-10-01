@@ -1,8 +1,8 @@
 cask "redline" do
-  version "0.1.9"
-  sha256 "2ef6ff869dde363723a0878722f939daede04d56f2350ccef3b7bc193938c192"
+  version "0.1.10"
+  sha256 "76df459e53a9048bc0645195d207f89742daeb6507f730226bdfe598f9d78f77"
 
-  url "https://github.com/croutoncreations/redline/releases/download/v#{version}/Redline-0.1.9-universal.dmg"
+  url "https://github.com/croutoncreations/redline/releases/download/v#{version}/Redline-0.1.10-universal.dmg"
   name "Redline"
   desc "Spends spare Codex and Claude subscription quota on queued agent jobs"
   homepage "https://github.com/croutoncreations/redline"
