@@ -1,0 +1,46 @@
+name: Audit
+
+# brew style + brew audit --strict on every formula and cask in this tap.
+# Files are pushed by croutoncreations/redline's release tooling (GoReleaser
+# for Formula/, scripts/update-homebrew-cask.sh for Casks/), which lints them
+# first; running on push to main is the post-publish backstop.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      # For a homebrew-* repository this checks the repo out as the tap.
+      - id: brew
+        uses: Homebrew/actions/setup-homebrew@main
+      - name: brew style and brew audit --strict
+        working-directory: ${{ steps.brew.outputs.repository-path }}
+        env:
+          TAP: ${{ steps.brew.outputs.tap-name }}
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          formulae=(Formula/*.rb)
+          casks=(Casks/*.rb)
+          # Never infer success from an empty tap.
+          if (( ${#formulae[@]} + ${#casks[@]} == 0 )); then
+            echo "::error::No formulae or casks found in ${TAP} ($PWD)"
+            exit 1
+          fi
+          status=0
+          brew style "${TAP}" || status=1
+          for f in "${formulae[@]}"; do
+            brew audit --strict --formula "${TAP}/$(basename "$f" .rb)" || status=1
+          done
+          for c in "${casks[@]}"; do
+            brew audit --strict --cask "${TAP}/$(basename "$c" .rb)" || status=1
+          done
+          exit "${status}"
