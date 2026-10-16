@@ -20,7 +20,7 @@ jobs:
     steps:
       # For a homebrew-* repository this checks the repo out as the tap.
       - id: brew
-        uses: Homebrew/actions/setup-homebrew@main
+        uses: Homebrew/actions/setup-homebrew@f9676f1ffe2e1a720f81b2c54c51cfb99915ec14 # main
       - name: brew style and brew audit --strict
         working-directory: ${{ steps.brew.outputs.repository-path }}
         env:
@@ -37,8 +37,10 @@ jobs:
           fi
           status=0
           brew style "${TAP}" || status=1
+          # GoReleaser always writes an explicit `version` that strict audit
+          # calls redundant with the URL; skip only that check for formulae.
           for f in "${formulae[@]}"; do
-            brew audit --strict --formula "${TAP}/$(basename "$f" .rb)" || status=1
+            brew audit --strict --except=version --formula "${TAP}/$(basename "$f" .rb)" || status=1
           done
           for c in "${casks[@]}"; do
             brew audit --strict --cask "${TAP}/$(basename "$c" .rb)" || status=1
