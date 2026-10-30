@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   audit:
-    runs-on: ubuntu-latest
+    runs-on: blacksmith-2vcpu-ubuntu-2404
     steps:
       # For a homebrew-* repository this checks the repo out as the tap.
       - id: brew
