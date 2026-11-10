@@ -5,21 +5,21 @@
 class Redline < Formula
   desc "Spend spare Codex and Claude subscription quota on queued agent jobs"
   homepage "https://github.com/croutoncreations/redline"
-  version "0.1.11"
+  version "0.1.12"
   license "Apache-2.0"
 
   on_macos do
     if Hardware::CPU.intel?
-      url "https://github.com/croutoncreations/redline/releases/download/v0.1.11/redline_0.1.11_darwin_amd64.tar.gz"
-      sha256 "02991d0e95a81843f9ad78a393d144e3f6ac550a5081647af873655517cd9a21"
+      url "https://github.com/croutoncreations/redline/releases/download/v0.1.12/redline_0.1.12_darwin_amd64.tar.gz"
+      sha256 "527e6bdc247879acb279c544b5aba88e44e2bb5659c07fdb42070356d1ad7a0e"
 
       define_method(:install) do
         bin.install "redline"
       end
     end
     if Hardware::CPU.arm?
-      url "https://github.com/croutoncreations/redline/releases/download/v0.1.11/redline_0.1.11_darwin_arm64.tar.gz"
-      sha256 "748deceb212300e37cc6593da55154ebe4d844832e1d33c1bebcef69fa3b984b"
+      url "https://github.com/croutoncreations/redline/releases/download/v0.1.12/redline_0.1.12_darwin_arm64.tar.gz"
+      sha256 "a815565dd1d09871f8fff695cad2d8eccd24c0f92f1b49cb07288239f9eef3cb"
 
       define_method(:install) do
         bin.install "redline"
@@ -29,15 +29,15 @@ class Redline < Formula
 
   on_linux do
     if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      url "https://github.com/croutoncreations/redline/releases/download/v0.1.11/redline_0.1.11_linux_amd64.tar.gz"
-      sha256 "917d74fb327a4d6ddef61b013f629342d3ae218c9e3136d3d315ef9d7a751c1c"
+      url "https://github.com/croutoncreations/redline/releases/download/v0.1.12/redline_0.1.12_linux_amd64.tar.gz"
+      sha256 "0ee1729b275b542494e49b2cab96e26d66a902d331f5b70e28bc98c6fb42c6fd"
       define_method(:install) do
         bin.install "redline"
       end
     end
     if Hardware::CPU.arm? && Hardware::CPU.is_64_bit?
-      url "https://github.com/croutoncreations/redline/releases/download/v0.1.11/redline_0.1.11_linux_arm64.tar.gz"
-      sha256 "0a57ab7b5c4271241f2069f8be92ab0a381cf1596c59af20e2a3a059aa20d5d6"
+      url "https://github.com/croutoncreations/redline/releases/download/v0.1.12/redline_0.1.12_linux_arm64.tar.gz"
+      sha256 "72be21f68c21b26a8eb9bbb5871c47d6231cac14fa8a2554afe2ed388b6bfa98"
       define_method(:install) do
         bin.install "redline"
       end
